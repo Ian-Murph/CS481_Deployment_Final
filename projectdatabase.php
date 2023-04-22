@@ -13,15 +13,15 @@ catch(PDOException $e )
   echo "Connection Established\n";
 
   // This is for verifying the passed information where the passed information is username and userPassword
-  $resultAdmin = $pdo->query("SELECT adminId FROM Admin WHERE username = 'CSUSM' && userPassword = '123654';");
+  $resultAdmin = $pdo->query("SELECT id FROM admin WHERE username = 'CSUSM' && password = '123654';");
 
   // Because we are grabbing ONLY the primary key,
   // there is no while loop necessary
-  echo $resultAdmin->fetch()["adminId"] . "<br/>";
+  echo $resultAdmin->fetch()["id"] . "<br/>";
 
 
   // This one needs a while loop as it will select multiple rows
-  $homePost = $pdo->query("SELECT * FROM Post;");
+  $homePost = $pdo->query("SELECT * FROM post;");
 
   while($result = $homePost->fetch()) // While there are posts to fetch
   {
@@ -35,17 +35,17 @@ catch(PDOException $e )
     $content = $result["content"];
     echo $content . "<br/>";
 
-    $createdAt = $result["createdAt"];
+    $createdAt = $result["created_at"];
     echo $createdAt . "<br/>";
 
-    $updatedAt = $result["updatedAt"];
+    $updatedAt = $result["updated_at"];
     echo $updatedAt . "<br/>";
 
-    $thumbnail = $result["thumbnail"];
+    $thumbnail = $result["thumbnail_photo"];
     echo $thumbnail . "<br/>";
   }
   // This query grabs all values in the row that has the postID called
-  $articlePost = $pdo->query("SELECT * FROM Post WHERE postID = '1001';");
+  $articlePost = $pdo->query("SELECT * FROM post WHERE id = '1001';");
 
   $articleResult = $articlePost->fetch();
   // Perform functions that read all the data and create a proper barrier for them
@@ -58,12 +58,12 @@ catch(PDOException $e )
   $articleContent = $articleResult["content"];
   echo $articleContent . "<br/>";
 
-  $articleCreatedAt = $articleResult["createdAt"];
+  $articleCreatedAt = $articleResult["created_at"];
   echo $articleCreatedAt . "<br/>";
 
-  $articleUpdatedAt = $articleResult["updatedAt"];
+  $articleUpdatedAt = $articleResult["updated_at"];
   echo $articleUpdatedAt . "<br/>";
 
-  $articleThumbnail = $articleResult["thumbnail"];
+  $articleThumbnail = $articleResult["thumbnail_photo"];
   echo $articleThumbnail . "<br/>";
 ?>

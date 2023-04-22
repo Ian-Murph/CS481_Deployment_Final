@@ -8,7 +8,7 @@ $userPassword = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get variables from form submission.
     $username = $_POST['username'];
-    $userPassword = $_POST['userPassword'];
+    $userPassword = $_POST['password'];
 
     // Validate form data.
     try {
@@ -34,15 +34,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die($message);
     }
 
-    $statement= $pdo->prepare("SELECT * FROM Admin WHERE username=:username AND userPassword=:userPassword");
+    $statement= $pdo->prepare("SELECT * FROM admin WHERE username=:username AND password=:password");
     $statement->execute([
         'username' => $username,
-        'userPassword' => $userPassword,
+        'password' => $password,
     ]);
     $user = $statement->fetch();
     if(isset($user)){
         $_SESSION['username'] = $user['username'];
-        $_SESSION['adminId'] = $user['adminId'];
+        $_SESSION['id'] = $user['id'];
         header("Location: blog-home.php");
     } else{
         header("Location: loginForm.html");

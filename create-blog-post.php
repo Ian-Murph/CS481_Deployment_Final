@@ -29,7 +29,7 @@
 
         // Connect to SQL server
         try {
-            $connString = "mysql:host=article-database.czvgalvp0qdu.us-west-2.rds.amazonaws.com; dbname=article_db";
+            $connString = "mysql:host=article-dabase.czvgalvp0qdu.us-west-2.rds.amazonaws.com; dbname=article_db";
             $user = "admin";
             $pass = "password";
             $pdo = new PDO($connString, $user, $pass, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)); //$pdo is the main SQL accessor variable
@@ -38,8 +38,8 @@
             die($message);
         }
 
-        $toppost = $pdo->query("SELECT * FROM Post ORDER BY postID DESC;");
-        $postID = $toppost->fetch()["postID"];
+        $toppost = $pdo->query("SELECT * FROM post ORDER BY id DESC;");
+        $postID = $toppost->fetch()["id"];
         $postID = $postID + 1;
         // Get logged in user's adminId
         $adminID = $_SESSION['adminId'];
@@ -49,16 +49,16 @@
         $updatedAt = date("Y-m-d");
 
         // After connecting, insert a new post.
-        $statement = $pdo->prepare("INSERT INTO Post (postID, adminID, title, subtitle, content, createdAt, updatedAt, thumbnail) VALUES (:postID, :adminID, :title, :subtitle, :content, :createdAt, :updatedAt, :thumbnail)");
+        $statement = $pdo->prepare("INSERT INTO Post (id, admin_id, title, subtitle, content, created_at, updated_at, thumbnail_photo) VALUES (:id, :admin_id, :title, :subtitle, :content, :created_at, :updated_at, :thumbnail_photo)");
         $statement->execute([
-            'postID' => $postID,
-            'adminID' => $adminID,
+            'id' => $postID,
+            'admin_id' => $adminID,
             'title' => $title,
             'subtitle' => $subtitle,
             'content' => $content,
-            'createdAt' => $createdAt,
-            'updatedAt' => $updatedAt,
-            'thumbnail' => $thumbnail
+            'created_at' => $createdAt,
+            'updated_at' => $updatedAt,
+            'thumbnail_photo' => $thumbnail
         ]);
 
         // If fininshed, redirect to home page.

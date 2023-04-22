@@ -34,7 +34,7 @@
 				$response = "Invalid Article";
 			else // Checks are done, now perform SQL grabs
 			{
-        $querystring = "SELECT * FROM Post WHERE postID = '" . $postID . "';";
+        $querystring = "SELECT * FROM post WHERE id = '" . $postID . "';";
         echo $querystring;
         $result = $pdo->query($querystring);
         $articledata = $result->fetch();
@@ -47,9 +47,9 @@
 
           $content = $articledata["content"];
 
-          $date = $articledata["updatedAt"];
+          $date = $articledata["updated_at"];
 
-          $thumbnail = $articledata["thumbnail"];
+          $thumbnail = $articledata["thumbnail_photo"];
         }
       }
 	 }

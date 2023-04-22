@@ -21,7 +21,7 @@ catch(PDOException $e )
   die($e->getMessage());
 }
 // After connecting, grab all articles from the SQL server and create block sets for each one
-$homePost = $pdo->query("SELECT * FROM Post ORDER BY postID DESC;");
+$homePost = $pdo->query("SELECT * FROM post ORDER BY id DESC;");
 
 ?>
 <!DOCTYPE html>
@@ -58,7 +58,7 @@ $homePost = $pdo->query("SELECT * FROM Post ORDER BY postID DESC;");
             <?php
               while($posts = $homePost->fetch())
               {
-                $postID = strval($posts["postID"]);
+                $postID = strval($posts["id"]);
 
                 $title = $posts["title"];
 
@@ -68,9 +68,9 @@ $homePost = $pdo->query("SELECT * FROM Post ORDER BY postID DESC;");
                 $content = substr($content, 0, 100);
                 $content = $content . "...";
 
-                $date = $posts["updatedAt"];
+                $date = $posts["updated_at"];
 
-                $thumbnail = $posts["thumbnail"];
+                $thumbnail = $posts["thumbnail_photo"];
 
                 echo "<div class='post'> <form action = 'articles/article.php' method = 'GET' > <input type = 'hidden' name = 'articleID' value = " . $postID . "> </input>";
                 echo "<input type='image' src='" . $thumbnail . "' alt='Not found' class='image'>";
