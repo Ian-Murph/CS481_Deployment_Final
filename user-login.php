@@ -8,10 +8,11 @@ $userPassword = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get variables from form submission.
     $username = $_POST['username'];
-    $userPassword = $_POST['password'];
+    $userPassword = $_POST['userPassword'];
 
     // Validate form data.
     try {
+        
         if (!isset($username) || !is_string($username)) {
             throw new Exception("Enter valid username");
         }
