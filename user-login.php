@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $statement= $pdo->prepare("SELECT * FROM admin WHERE username=:username AND password=:password");
     $statement->execute([
         'username' => $username,
-        'password' => $password,
+        'password' => $userPassword,
     ]);
     $user = $statement->fetch();
     if(isset($user)){
