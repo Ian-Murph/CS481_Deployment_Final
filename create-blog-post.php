@@ -6,7 +6,7 @@
     $thumbnail = "";
 
     // Check if it is POST request and an admin is logged in.
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['username']) && isset($_SESSION['adminId'])) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['username']) && isset($_SESSION['id'])) {
         // Get variables from form submission.
         $title = $_POST['title'];
         $subtitle = $_POST['subtitle'];
@@ -42,14 +42,14 @@
         $postID = $toppost->fetch()["id"];
         $postID = $postID + 1;
         // Get logged in user's adminId
-        $adminID = $_SESSION['adminId'];
+        $adminID = $_SESSION['id'];
 
         // Get dates
         $createdAt = date("Y-m-d");
         $updatedAt = date("Y-m-d");
 
         // After connecting, insert a new post.
-        $statement = $pdo->prepare("INSERT INTO Post (id, admin_id, title, subtitle, content, created_at, updated_at, thumbnail_photo) VALUES (:id, :admin_id, :title, :subtitle, :content, :created_at, :updated_at, :thumbnail_photo)");
+        $statement = $pdo->prepare("INSERT INTO post (id, admin_id, title, subtitle, content, created_at, updated_at, thumbnail_photo) VALUES (:id, :admin_id, :title, :subtitle, :content, :created_at, :updated_at, :thumbnail_photo)");
         $statement->execute([
             'id' => $postID,
             'admin_id' => $adminID,

@@ -16,7 +16,7 @@
             <a href="blog-home.php" class="logo"><span>CSUSM</span>Blog</a>
             <nav class="navbar">
                 <a href="blog-home.php">Home</a>
-                <?php if (isset($_SESSION['username']) && isset($_SESSION['adminId'])): ?>
+                <?php if (isset($_SESSION['username']) && isset($_SESSION['id'])): ?>
                     <a href="user-logout.php">Logout</a>
                 <?php else: ?>
                     <a href="loginForm.html">Login</a>
@@ -24,7 +24,7 @@
             </nav>
         </header>
 
-        <?php if (isset($_SESSION['username']) && isset($_SESSION['adminId'])): ?>
+        <?php if (isset($_SESSION['username']) && isset($_SESSION['id'])): ?>
             <form action="create-blog-post.php" method="post" enctype="multipart/form-data" id="create-post-form">
                 <h1>Create a post</h1>
                 <div class="create-post-form-item">

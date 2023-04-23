@@ -67,7 +67,7 @@
         <a href="../blog-home.php" class="logo"><span>CSUSM</span>Blog</a>
         <nav class="navbar">
             <a href="../blog-home.php">Home</a>
-            <?php if (isset($_SESSION['username']) && isset($_SESSION['adminId'])): ?>
+            <?php if (isset($_SESSION['username']) && isset($_SESSION['id'])): ?>
               <a href="../blog-create.php">Create Post</a>
               <a href="../user-logout.php">Logout</a>
             <?php else: ?>
