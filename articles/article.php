@@ -13,10 +13,12 @@
   //Try to connect to SQL server
   try
   {
-    $connString = "mysql:host=article-dabase.czvgalvp0qdu.us-west-2.rds.amazonaws.com; dbname=article_db";
-    $user = "admin";
-    $pass = "password";
-    $pdo = new PDO($connString, $user, $pass); //$pdo is the main SQL accessor variable
+    $dbName = getenv('CLOUDSQL_DATABASE_NAME');
+       $dbConn = getenv('CLOUDSQL_CONNECTION_NAME');
+       $dbUser = getenv('CLOUDSQL_USER');
+       $dbPass = getenv('CLOUDSQL_PASSWORD');
+       $dsn = "mysql:unix_socket=/cloudsql/${dbConn};dbname=${dbName}";
+       $pdo = new PDO($dsn, $dbUser, $dbPass);
   }
   catch(PDOException $e )
   {
@@ -34,7 +36,7 @@
 				$response = "Invalid Article";
 			else // Checks are done, now perform SQL grabs
 			{
-        $querystring = "SELECT * FROM post WHERE id = '" . $postID . "';";
+        $querystring = "SELECT * FROM post WHERE postID = '" . $postID . "';";
         echo $querystring;
         $result = $pdo->query($querystring);
         $articledata = $result->fetch();
@@ -85,7 +87,7 @@
     <section class = "container">
       <div class="post-container">
         <div class="post">
-          <?php if (isset($thumbnail) && !empty($thumbnail)): ?> 
+          <?php if (isset($thumbnail) && !empty($thumbnail)): ?>
             <div class="image">
               <img src=<?php echo $thumbnail ?> alt="Error loading image.">
             </div>

@@ -8,8 +8,6 @@ env_variables:
     CLOUDSQL_PASSWORD: "123654"
     CLOUDSQL_DATABASE_NAME: "csusmblog"
 
-  entrypoint: serve blog-home.php
-
 handlers:
 - url: /
   script: blog-home.php
@@ -19,3 +17,9 @@ handlers:
 
 - url: /styles
   static_dir: styles
+
+  url: /images
+  static_dir: images
+
+    url: /scripts
+    static_dir: scripts
