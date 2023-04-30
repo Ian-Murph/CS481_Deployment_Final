@@ -3,7 +3,19 @@ runtime: php81
 env_variables:
     GOOGLE_STORAGE_BUCKET: "loyal-road-382920.appspot.com"
     # populate these to use the "mysql" or "postres" backends
-    CLOUDSQL_CONNECTION_NAME: "google-datastore-demo:us-west1:article-database"
+    CLOUDSQL_CONNECTION_NAME: "loyal-road-382920:us-west1:article-database"
     CLOUDSQL_USER: "CSUSM"
     CLOUDSQL_PASSWORD: "123654"
     CLOUDSQL_DATABASE_NAME: "csusmblog"
+
+  entrypoint: serve blog-home.php
+
+handlers:
+- url: /
+  script: blog-home.php
+
+- url: /index\.html
+  script: blog-home.php
+
+- url: /styles
+  static_dir: styles

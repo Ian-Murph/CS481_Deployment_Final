@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die($message);
     }
 
-    $statement= $pdo->prepare("SELECT * FROM admin WHERE username=:username AND password=:password");
+    $statement= $pdo->prepare("SELECT * FROM admin WHERE username=:username AND userPassword=:password");
     $statement->execute([
         'username' => $username,
         'password' => $userPassword,

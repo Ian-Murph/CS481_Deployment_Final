@@ -17,14 +17,13 @@ try
      $dbPass = getenv('CLOUDSQL_PASSWORD');
      $dsn = "mysql:unix_socket=/cloudsql/${dbConn};dbname=${dbName}";
      $pdo = new PDO($dsn, $dbUser, $dbPass);
-     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch(PDOException $e )
 {
   die($e->getMessage());
 }
 // After connecting, grab all articles from the SQL server and create block sets for each one
-$homePost = $pdo->query("SELECT * FROM post ORDER BY id DESC;");
+$homePost = $pdo->query("SELECT * FROM post ORDER BY postID DESC;");
 
 ?>
 <!DOCTYPE html>

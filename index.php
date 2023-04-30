@@ -6,3 +6,4 @@ $app = require __DIR__ . '/blog-home.php';
 
 // Bootstrap the slim framework to handle the request.
 $app->run();
+?>

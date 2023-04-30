@@ -16,7 +16,7 @@ catch(PDOException $e )
   echo "Connection Established\n";
 
   // This is for verifying the passed information where the passed information is username and userPassword
-  $resultAdmin = $pdo->query("SELECT id FROM admin WHERE username = 'CSUSM' && password = '123654';");
+  $resultAdmin = $pdo->query("SELECT adminId FROM admin WHERE username = 'CSUSM' && userPassword = '123654';");
 
   // Because we are grabbing ONLY the primary key,
   // there is no while loop necessary
