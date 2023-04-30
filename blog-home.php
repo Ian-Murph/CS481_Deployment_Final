@@ -11,19 +11,17 @@
 //Try to connect to SQL server
 try
 {
-  $dbName = getenv('CLOUDSQL_DATABASE_NAME');
-     $dbConn = getenv('CLOUDSQL_CONNECTION_NAME');
-     $dbUser = getenv('CLOUDSQL_USER');
-     $dbPass = getenv('CLOUDSQL_PASSWORD');
-     $dsn = "mysql:unix_socket=/cloudsql/${dbConn};dbname=${dbName}";
-     $pdo = new PDO($dsn, $dbUser, $dbPass);
+  $connString = "mysql:host=localhost; dbname=csusmblog";
+  $user = "root";
+  $pass = "root";
+  $pdo = new PDO($connString, $user, $pass); //$pdo is the main SQL accessor variable
 }
 catch(PDOException $e )
 {
   die($e->getMessage());
 }
 // After connecting, grab all articles from the SQL server and create block sets for each one
-$homePost = $pdo->query("SELECT * FROM post ORDER BY postID DESC;");
+$homePost = $pdo->query("SELECT * FROM Post ORDER BY postID DESC;");
 
 ?>
 <!DOCTYPE html>
@@ -70,7 +68,7 @@ $homePost = $pdo->query("SELECT * FROM post ORDER BY postID DESC;");
                 $content = substr($content, 0, 100);
                 $content = $content . "...";
 
-                $date = $posts["updated_at"];
+                $date = $posts["updatedAt"];
 
                 $thumbnail = $posts["thumbnail"];
 
