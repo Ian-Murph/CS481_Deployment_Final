@@ -29,29 +29,31 @@
 
         // Connect to SQL server
         try {
-            $connString = "mysql:host=article-dabase.czvgalvp0qdu.us-west-2.rds.amazonaws.com; dbname=article_db";
-            $user = "admin";
-            $pass = "password";
-            $pdo = new PDO($connString, $user, $pass, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)); //$pdo is the main SQL accessor variable
+          $dbName = getenv('CLOUDSQL_DATABASE_NAME');
+             $dbConn = getenv('CLOUDSQL_CONNECTION_NAME');
+             $dbUser = getenv('CLOUDSQL_USER');
+             $dbPass = getenv('CLOUDSQL_PASSWORD');
+             $dsn = "mysql:unix_socket=/cloudsql/${dbConn};dbname=${dbName}";
+             $pdo = new PDO($dsn, $dbUser, $dbPass);
         } catch (Exception $e) {
             $message = $e->getMessage();
             die($message);
         }
 
-        $toppost = $pdo->query("SELECT * FROM post ORDER BY id DESC;");
-        $postID = $toppost->fetch()["id"];
+        $toppost = $pdo->query("SELECT * FROM post ORDER BY postID DESC;");
+        $postID = $toppost->fetch()["postID"];
         $postID = $postID + 1;
         // Get logged in user's adminId
-        $adminID = $_SESSION['id'];
+        $adminID = $_SESSION['adminId'];
 
         // Get dates
         $createdAt = date("Y-m-d");
         $updatedAt = date("Y-m-d");
 
         // After connecting, insert a new post.
-        $statement = $pdo->prepare("INSERT INTO post (id, admin_id, title, subtitle, content, created_at, updated_at, thumbnail) VALUES (:id, :admin_id, :title, :subtitle, :content, :created_at, :updated_at, :thumbnail)");
+        $statement = $pdo->prepare("INSERT INTO post (postID, admin_id, title, subtitle, content, created_at, updated_at, thumbnail) VALUES (:id, :admin_id, :title, :subtitle, :content, :created_at, :updated_at, :thumbnail)");
         $statement->execute([
-            'id' => $postID,
+            'postID' => $postID,
             'admin_id' => $adminID,
             'title' => $title,
             'subtitle' => $subtitle,
