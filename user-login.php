@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $statement->fetch();
     if(isset($user)){
         $_SESSION['username'] = $user['username'];
-        $_SESSION['id'] = $user['id'];
+        $_SESSION['adminId'] = $user['adminId'];
         header("Location: blog-home.php");
     } else{
         header("Location: loginForm.html");

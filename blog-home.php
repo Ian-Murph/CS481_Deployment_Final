@@ -41,7 +41,7 @@ $homePost = $pdo->query("SELECT * FROM post ORDER BY postID DESC;");
         <a href="blog-home.php" class="logo"><span>CSUSM</span>Blog</a>
         <nav class="navbar">
             <a href="blog-home.php">Home</a>
-            <?php if (isset($_SESSION['username']) && isset($_SESSION['id'])): ?>
+            <?php if (isset($_SESSION['username']) && isset($_SESSION['adminId'])): ?>
               <a href="blog-create.php">Create Post</a>
               <a href="user-logout.php">Logout</a>
             <?php else: ?>
@@ -60,7 +60,7 @@ $homePost = $pdo->query("SELECT * FROM post ORDER BY postID DESC;");
             <?php
               while($posts = $homePost->fetch())
               {
-                $postID = strval($posts["id"]);
+                $postID = strval($posts["postID"]);
 
                 $title = $posts["title"];
 
