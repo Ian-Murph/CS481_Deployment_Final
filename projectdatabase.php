@@ -1,10 +1,13 @@
 <?php
 try
 {
-  $connString = "mysql:host=article-dabase.czvgalvp0qdu.us-west-2.rds.amazonaws.com; dbname=article_db";
-  $user = "admin";
-  $pass = "password";
-  $pdo = new PDO($connString, $user, $pass);
+  $dbName = getenv('CLOUDSQL_DATABASE_NAME');
+  $dbConn = getenv('CLOUDSQL_CONNECTION_NAME');
+  $dbUser = getenv('CLOUDSQL_USER');
+  $dbPass = getenv('CLOUDSQL_PASSWORD');
+  $dsn = "mysql:unix_socket=/cloudsql/${dbConn};dbname=${dbName}";
+  $pdo = new PDO($dsn, $dbUser, $dbPass);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch(PDOException $e )
 {
