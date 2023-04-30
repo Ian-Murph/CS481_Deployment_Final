@@ -44,7 +44,7 @@ catch(PDOException $e )
     $updatedAt = $result["updated_at"];
     echo $updatedAt . "<br/>";
 
-    $thumbnail = $result["thumbnail_photo"];
+    $thumbnail = $result["thumbnail"];
     echo $thumbnail . "<br/>";
   }
   // This query grabs all values in the row that has the postID called
@@ -67,6 +67,6 @@ catch(PDOException $e )
   $articleUpdatedAt = $articleResult["updated_at"];
   echo $articleUpdatedAt . "<br/>";
 
-  $articleThumbnail = $articleResult["thumbnail_photo"];
+  $articleThumbnail = $articleResult["thumbnail"];
   echo $articleThumbnail . "<br/>";
 ?>

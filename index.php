@@ -14,6 +14,10 @@ switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
       require 'create-blog-post.php';
       break;
 
+    case '/blog-create.php':
+      require 'blog-create.php';
+      break;
+
     case '/loginForm.html':
        require 'loginForm.html';
        break;

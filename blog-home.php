@@ -72,7 +72,7 @@ $homePost = $pdo->query("SELECT * FROM post ORDER BY postID DESC;");
 
                 $date = $posts["updated_at"];
 
-                $thumbnail = $posts["thumbnail_photo"];
+                $thumbnail = $posts["thumbnail"];
 
                 echo "<div class='post'> <form action = 'articles/article.php' method = 'GET' > <input type = 'hidden' name = 'articleID' value = " . $postID . "> </input>";
                 echo "<input type='image' src='" . $thumbnail . "' alt='Not found' class='image'>";

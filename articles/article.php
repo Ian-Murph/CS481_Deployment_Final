@@ -51,7 +51,7 @@
 
           $date = $articledata["updated_at"];
 
-          $thumbnail = $articledata["thumbnail_photo"];
+          $thumbnail = $articledata["thumbnail"];
         }
       }
 	 }

@@ -49,7 +49,7 @@
         $updatedAt = date("Y-m-d");
 
         // After connecting, insert a new post.
-        $statement = $pdo->prepare("INSERT INTO post (id, admin_id, title, subtitle, content, created_at, updated_at, thumbnail_photo) VALUES (:id, :admin_id, :title, :subtitle, :content, :created_at, :updated_at, :thumbnail_photo)");
+        $statement = $pdo->prepare("INSERT INTO post (id, admin_id, title, subtitle, content, created_at, updated_at, thumbnail) VALUES (:id, :admin_id, :title, :subtitle, :content, :created_at, :updated_at, :thumbnail)");
         $statement->execute([
             'id' => $postID,
             'admin_id' => $adminID,
@@ -58,7 +58,7 @@
             'content' => $content,
             'created_at' => $createdAt,
             'updated_at' => $updatedAt,
-            'thumbnail_photo' => $thumbnail
+            'thumbnail' => $thumbnail
         ]);
 
         // If fininshed, redirect to home page.
