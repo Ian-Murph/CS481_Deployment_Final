@@ -49,7 +49,7 @@
 
           $content = $articledata["content"];
 
-          $date = $articledata["updated_at"];
+          $date = $articledata["updatedAt"];
 
           $thumbnail = $articledata["thumbnail"];
         }
